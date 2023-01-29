@@ -9,9 +9,7 @@ module HexletCode
     DEFAULT_ATTRIBUTES = { rows: 40, cols: 20 }.freeze
 
     def initialize(attributes)
-      raise "Should have required 'value' attribute" unless attributes[:value]
-
-      @value = attributes[:value]
+      @value = attributes[:value] || ''
       super(attributes.except(:value))
     end
 
