@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
-require_relative("../tag")
-require_relative("base")
+module HexletCode
+  autoload :Tag, "hexlet_code/tag"
+  autoload :Base, "hexlet_code/elements/base"
 
-class Textarea < Base
-  NAME = "textarea"
-  DEFAULT_ATTRIBUTES = { rows: 40, cols: 20 }.freeze
+  class Textarea < Base
+    NAME = "textarea"
+    DEFAULT_ATTRIBUTES = { rows: 40, cols: 20 }.freeze
 
-  def initialize(attributes)
-    raise "Should have required 'value' attribute" unless attributes[:value]
+    def initialize(attributes)
+      raise "Should have required 'value' attribute" unless attributes[:value]
 
-    @value = attributes[:value]
-    super(attributes.except(:value))
-  end
+      @value = attributes[:value]
+      super(attributes.except(:value))
+    end
 
-  def render
-    Tag.build(NAME, { **DEFAULT_ATTRIBUTES, **@attributes }) { @value }
+    def render
+      Tag.build(NAME, { **DEFAULT_ATTRIBUTES, **@attributes }) { @value }
+    end
   end
 end
