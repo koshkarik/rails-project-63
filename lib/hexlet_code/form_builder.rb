@@ -20,7 +20,7 @@ module HexletCode
     end
 
     def submit(value = "Save")
-      add_form_content(:input, type: "Submit", value: value, as: :submit)
+      add_form_content(:input, type: "submit", value: value, as: :submit)
     end
 
     def build
