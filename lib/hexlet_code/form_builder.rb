@@ -25,9 +25,9 @@ module HexletCode
 
     def build
       prepared_attributes = {
-        action: "#",
+        action: @attributes[:url] || "#",
         method: "post",
-        **@attributes
+        **@attributes.except(:url)
       }
       Tag.build("form", prepared_attributes) do
         content = @form_content.join("\n")
