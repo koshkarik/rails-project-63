@@ -16,7 +16,7 @@ module HexletCode
     end
 
     def render
-      Tag.build(NAME, { for: @for, **DEFAULT_ATTRIBUTES }) { @for.capitalize }
+      Tag.build(NAME, { **DEFAULT_ATTRIBUTES, for: @for }) { @for.capitalize }
     end
   end
 end
