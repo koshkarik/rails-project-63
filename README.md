@@ -4,7 +4,8 @@
 
 ### Usage
 ```ruby
-user = { name: 'John Doe', job: 'Hexlet' }
+user = Struct.new(:name, :job).new('John Doe', 'Hexlet')
+
 HexletCode.form_for user do |f|
   f.input :name, class: 'user-input'
   f.input :job, as: :text
