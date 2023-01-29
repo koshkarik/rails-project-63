@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/koshkarik/rails-project-63/workflows/hexlet-check/badge.svg)
+![Actions Status](https://github.com/koshkarik/rails-project-63/workflows/hexlet-check/badge.svg)
 
 ## Simple form generator
 
