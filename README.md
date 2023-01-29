@@ -3,7 +3,7 @@
 ## Simple form generator
 
 ### Usage
-```
+```ruby
 user = { name: 'John Doe', job: 'Hexlet' }
 HexletCode.form_for user do |f|
   f.input :name, class: 'user-input'
@@ -13,7 +13,7 @@ end
 ```
 
 ### Result
-```
+```html
 <form action="#" method="post">
     <label for="name">Name</label>
     <input type="text" value="John Doe" class="user-input" name="name">
