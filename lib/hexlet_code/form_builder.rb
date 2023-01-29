@@ -24,7 +24,7 @@ module HexletCode
     end
 
     def build
-      Tag.build("form", action: @attributes[:url] || "#", method: "post") do
+      Tag.build("form", action: @attributes[:url] || "#", method: @attributes[:method] || "post") do
         content = @form_content.join("\n")
         content.empty? ? "" : "\n#{content}\n"
       end
