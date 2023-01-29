@@ -32,7 +32,7 @@ class TestHexletCode < Minitest::Test
 
     prepared_result = remove_new_lines(result)
     assert prepared_result == '<form action="#" method="post">' \
-    '<label for="name">Name</label><input type="text" value="rob" name="name"></form>'
+      '<label for="name">Name</label><input type="text" value="rob" name="name"></form>'
   end
 
   def test_build_nested_form_with_textarea
@@ -42,10 +42,10 @@ class TestHexletCode < Minitest::Test
     end
     prepared_result = remove_new_lines(result)
     assert prepared_result == '<form action="#" method="post">' \
-    '<label for="name">Name</label>' \
-    '<input type="text" value="rob" name="name">' \
-    '<label for="job">Job</label>' \
-    '<textarea rows="40" cols="20" name="job">hexlet</textarea></form>'
+      '<label for="name">Name</label>' \
+      '<input type="text" value="rob" name="name">' \
+      '<label for="job">Job</label>' \
+      '<textarea rows="40" cols="20" name="job">hexlet</textarea></form>'
   end
 
   def test_build_nested_form_with_textarea_and_additional_attrs
@@ -55,10 +55,10 @@ class TestHexletCode < Minitest::Test
     end
     prepared_result = remove_new_lines(result)
     assert prepared_result == '<form action="#" method="post">' \
-    '<label for="name">Name</label>' \
-    '<input type="text" value="rob" class="user-input" name="name">' \
-    '<label for="job">Job</label>' \
-    '<textarea rows="50" cols="50" name="job">hexlet</textarea></form>'
+      '<label for="name">Name</label>' \
+      '<input type="text" value="rob" class="user-input" name="name">' \
+      '<label for="job">Job</label>' \
+      '<textarea rows="50" cols="50" name="job">hexlet</textarea></form>'
   end
 
   def test_not_given_field
@@ -82,10 +82,10 @@ class TestHexletCode < Minitest::Test
     end
     prepared_result = remove_new_lines(result)
     assert prepared_result == '<form action="#" method="post">' \
-    '<label for="name">Name</label>' \
-    '<input type="text" value="rob" class="user-input" name="name">' \
-    '<label for="job">Job</label>' \
-    '<textarea rows="50" cols="50" name="job">hexlet</textarea>' \
-    '<input type="submit" value="Wow"></form>'
+      '<label for="name">Name</label>' \
+      '<input type="text" value="rob" class="user-input" name="name">' \
+      '<label for="job">Job</label>' \
+      '<textarea rows="50" cols="50" name="job">hexlet</textarea>' \
+      '<input type="submit" value="Wow"></form>'
   end
 end
