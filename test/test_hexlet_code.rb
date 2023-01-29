@@ -62,14 +62,13 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_not_given_field
-      HexletCode.form_for @test_user do |f|
-        f.input :name, class: 'user-input'
-        f.input :job, as: :text, rows: 50, cols: 50
-        f.input :age
-      end
-    rescue StandardError => e
-      assert e.to_s.include?("undefined method `age' for")
+    HexletCode.form_for @test_user do |f|
+      f.input :name, class: 'user-input'
+      f.input :job, as: :text, rows: 50, cols: 50
+      f.input :age
     end
+  rescue StandardError => e
+    assert e.to_s.include?("undefined method `age' for")
   end
 
   def test_build_nested_form_with_submit
