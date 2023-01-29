@@ -16,11 +16,11 @@ module HexletCode
 
     def input(name, attrubutes = {})
       value = @entity.public_send(name)
-      add_form_content(:input, { **attrubutes, value: value, name: name })
+      add_form_content(:input, { **attrubutes, value:, name: })
     end
 
     def submit(value = 'Save')
-      add_form_content(:input, type: 'submit', value: value, as: :submit)
+      add_form_content(:input, type: 'submit', value:, as: :submit)
     end
 
     def build

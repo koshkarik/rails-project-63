@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module HexletCode
   class Base
     def initialize(attributes)
