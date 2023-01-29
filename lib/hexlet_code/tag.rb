@@ -3,16 +3,13 @@
 module HexletCode
   class Tag
     def self.build(tag_name, attributes = {})
-      attributes_list = []
-      attributes.each do |key, value|
-        attributes_list.push("#{key}=\"#{value}\"")
-      end
+      attributes_list = attributes.map { |key, value| "#{key}=\"#{value}\""}
       prepared_attributes = attributes_list.empty? ? '' : " #{attributes_list.join ' '}"
-      left_side = "<#{tag_name}#{prepared_attributes}>"
-      return left_side unless block_given?
+      opening_tag = "<#{tag_name}#{prepared_attributes}>"
+      return opening_tag unless block_given?
 
       content = yield
-      "#{left_side}#{content}</#{tag_name}>"
+      "#{opening_tag}#{content}</#{tag_name}>"
     end
   end
 end

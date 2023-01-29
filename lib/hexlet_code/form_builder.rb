@@ -7,9 +7,9 @@ module HexletCode
   autoload :Textarea, 'hexlet_code/elements/textarea'
 
   class FormBuilder
-    def initialize(entity, attributes = {})
+    def initialize(entity, form_attributes = {})
       @entity = entity
-      @attributes = attributes
+      @form_attributes = form_attributes
       @form_content = []
       yield self if block_given?
     end
@@ -25,9 +25,9 @@ module HexletCode
 
     def build
       prepared_attributes = {
-        action: @attributes[:url] || '#',
+        action: @form_attributes[:url] || '#',
         method: 'post',
-        **@attributes.except(:url)
+        **@form_attributes.except(:url)
       }
       Tag.build('form', prepared_attributes) do
         content = @form_content.join("\n")
