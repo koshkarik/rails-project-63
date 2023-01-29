@@ -38,11 +38,10 @@ module HexletCode
     private
 
     def render_item(tag_name, attributes = {})
-      as = attributes[:as]
       prepared_attributes = attributes.except(:as)
-      if tag_name == :input && as == :text
+      if tag_name == :input && attributes[:as] == :text
         [Label.new(for: attributes[:name]).render, Textarea.new(prepared_attributes).render]
-      elsif tag_name == :input && as == :submit
+      elsif tag_name == :input && attributes[:as] == :submit
         [Input.new(prepared_attributes).render]
       elsif tag_name == :input
         [Label.new(for: attributes[:name]).render, Input.new(prepared_attributes).render]
