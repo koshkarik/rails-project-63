@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module HexletCode
-  autoload :Tag, "hexlet_code/tag"
-  autoload :Label, "hexlet_code/elements/label"
-  autoload :Input, "hexlet_code/elements/input"
-  autoload :Textarea, "hexlet_code/elements/textarea"
+  autoload :Tag, 'hexlet_code/tag'
+  autoload :Label, 'hexlet_code/elements/label'
+  autoload :Input, 'hexlet_code/elements/input'
+  autoload :Textarea, 'hexlet_code/elements/textarea'
 
   class FormBuilder
     def initialize(entity, attributes = {})
@@ -19,19 +19,19 @@ module HexletCode
       add_form_content(:input, { **attrubutes, value: value, name: name })
     end
 
-    def submit(value = "Save")
-      add_form_content(:input, type: "submit", value: value, as: :submit)
+    def submit(value = 'Save')
+      add_form_content(:input, type: 'submit', value: value, as: :submit)
     end
 
     def build
       prepared_attributes = {
-        action: @attributes[:url] || "#",
-        method: "post",
+        action: @attributes[:url] || '#',
+        method: 'post',
         **@attributes.except(:url)
       }
-      Tag.build("form", prepared_attributes) do
+      Tag.build('form', prepared_attributes) do
         content = @form_content.join("\n")
-        content.empty? ? "" : "\n#{content}\n"
+        content.empty? ? '' : "\n#{content}\n"
       end
     end
 
@@ -47,7 +47,7 @@ module HexletCode
       elsif tag_name == :input
         [Label.new(for: attributes[:name]).render, Input.new(prepared_attributes).render]
       else
-        raise "Unknown element in render"
+        raise 'Unknown element in render'
       end
     end
 

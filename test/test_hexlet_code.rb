@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require 'test_helper'
 
 class TestHexletCode < Minitest::Test
   User = Struct.new(:name, :job)
   def setup
-    @test_user = User.new("rob", "hexlet")
+    @test_user = User.new('rob', 'hexlet')
   end
 
   def remove_new_lines(text)
-    text.gsub(/\n/, "")
+    text.gsub(/\n/, '')
   end
 
   def test_that_it_has_a_version_number
@@ -21,7 +21,7 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_basic_form_attributes_given
-    result = HexletCode.form_for(@test_user, url: "/users")
+    result = HexletCode.form_for(@test_user, url: '/users')
     assert result == '<form action="/users" method="post"></form>'
   end
 
@@ -45,7 +45,7 @@ class TestHexletCode < Minitest::Test
 
   def test_build_nested_form_with_textarea_and_additional_attrs
     result = HexletCode.form_for @test_user do |f|
-      f.input :name, class: "user-input"
+      f.input :name, class: 'user-input'
       f.input :job, as: :text, rows: 50, cols: 50
     end
     prepared_result = remove_new_lines(result)
@@ -55,7 +55,7 @@ class TestHexletCode < Minitest::Test
   def test_not_given_field
     begin
       HexletCode.form_for @test_user do |f|
-        f.input :name, class: "user-input"
+        f.input :name, class: 'user-input'
         f.input :job, as: :text, rows: 50, cols: 50
         f.input :age
       end
@@ -67,9 +67,9 @@ class TestHexletCode < Minitest::Test
 
   def test_build_nested_form_with_submit
     result = HexletCode.form_for @test_user do |f|
-      f.input :name, class: "user-input"
+      f.input :name, class: 'user-input'
       f.input :job, as: :text, rows: 50, cols: 50
-      f.submit "Wow"
+      f.submit 'Wow'
     end
     prepared_result = remove_new_lines(result)
     assert prepared_result == '<form action="#" method="post"><label for="name">Name</label><input type="text" value="rob" class="user-input" name="name"><label for="job">Job</label><textarea rows="50" cols="50" name="job">hexlet</textarea><input type="submit" value="Wow"></form>'

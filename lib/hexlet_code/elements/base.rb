@@ -6,7 +6,7 @@ module HexletCode
     end
 
     def render
-      raise "Should have render method"
+      raise 'Should have render method'
     end
   end
 end
