@@ -40,14 +40,15 @@ module HexletCode
     def render_item(tag_name, attributes = {})
       raise 'Unknown element in render' unless tag_name == :input
 
-      as = attributes[:as]
       prepared_attributes = attributes.except(:as)
-      if tag_name == :input && attributes[:as] == :text
+      case attributes[:as]
+      when :text
         [Label.new(for: attributes[:name]).render, Textarea.new(prepared_attributes).render]
-      elsif tag_name == :input && attributes[:as] == :submit
+      when :submit
         [Input.new(prepared_attributes).render]
       else
         [Label.new(for: attributes[:name]).render, Input.new(prepared_attributes).render]
+      end
     end
 
     def add_form_content(name, attributes = {})
