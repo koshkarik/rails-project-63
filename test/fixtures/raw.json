@@ -1,0 +1,25 @@
+[{
+  "type": "form",
+  "attributes": {
+    "action": "#",
+    "method": "post"
+  },
+  "children": [
+    {
+      "type": "label",
+      "attributes": {
+        "for": "name"
+      },
+      "children": "Name"
+    },
+    {
+      "type": "input",
+      "attributes": {
+        "type": "text",
+        "value": "rob",
+        "name": "name"
+      },
+      "children": null
+    }
+  ]
+}]

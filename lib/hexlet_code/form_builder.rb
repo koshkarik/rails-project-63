@@ -1,59 +1,74 @@
 # frozen_string_literal: true
 
 module HexletCode
-  autoload :Tag, 'hexlet_code/tag'
-  autoload :Label, 'hexlet_code/elements/label'
-  autoload :Input, 'hexlet_code/elements/input'
-  autoload :Textarea, 'hexlet_code/elements/textarea'
+  autoload :HtmlRenderer, 'hexlet_code/html_renderer'
+  autoload :RawRenderer, 'hexlet_code/raw_renderer'
 
   class FormBuilder
+    attr_accessor :output_type
+
+    DEFAULT_ATTRIBUTES = {
+      input: { type: 'text', value: '' },
+      textarea: { rows: 40, cols: 20 },
+      label: {}
+    }.freeze
+
     def initialize(entity, form_attributes = {})
       @entity = entity
       @form_attributes = form_attributes
-      @form_content = []
+      @output_type = :html
+      @form_data = {
+        type: :form,
+        attributes: {
+          action: form_attributes[:url] || '#',
+          method: 'post',
+          **@form_attributes.except(:url)
+        },
+        children: []
+      }
+
       yield self if block_given?
     end
 
-    def input(name, attrubutes = {})
+    def input(name, attributes = {})
       value = @entity.public_send(name)
-      add_form_content(:input, { **attrubutes, value:, name: })
+      prepared_attributes = attributes.except(:as)
+      label = prepare_item(:label, { for: name }, name.capitalize)
+
+      if attributes[:as] == :text
+        add_form_content([label, prepare_item(:textarea, { **prepared_attributes, name: }, value)])
+      else
+        add_form_content([label, prepare_item(:input, { **prepared_attributes, value:, name: })])
+      end
     end
 
     def submit(value = 'Save')
-      add_form_content(:input, type: 'submit', value:, as: :submit)
+      add_form_content([prepare_item(:input, value:, type: :submit)])
     end
 
     def build
-      prepared_attributes = {
-        action: @form_attributes[:url] || '#',
-        method: 'post',
-        **@form_attributes.except(:url)
-      }
-      Tag.build('form', prepared_attributes) do
-        content = @form_content.join("\n")
-        content.empty? ? '' : "\n#{content}\n"
-      end
+      renderer.render([@form_data])
     end
 
     private
 
-    def render_item(tag_name, attributes = {})
-      raise 'Unknown element in render' unless tag_name == :input
-
-      prepared_attributes = attributes.except(:as)
-      case attributes[:as]
-      when :text
-        [Label.new(for: attributes[:name]).render, Textarea.new(prepared_attributes).render]
-      when :submit
-        [Input.new(prepared_attributes).render]
+    def renderer
+      case @output_type
+      when :html
+        HtmlRenderer
+      when :raw
+        RawRenderer
       else
-        [Label.new(for: attributes[:name]).render, Input.new(prepared_attributes).render]
+        raise('Unknown output type')
       end
     end
 
-    def add_form_content(name, attributes = {})
-      elements = render_item(name, attributes)
-      elements.each { |item| @form_content << item }
+    def prepare_item(type, attributes, children = nil)
+      { type:, attributes: { **DEFAULT_ATTRIBUTES[type], **attributes }, children: }
+    end
+
+    def add_form_content(content)
+      @form_data[:children].push(*content)
     end
   end
 end
