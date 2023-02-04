@@ -21,7 +21,7 @@ module HexletCode
         attributes: {
           action: form_attributes[:url] || '#',
           method: 'post',
-          **@form_attributes.except(:url)
+          **form_attributes.except(:url)
         },
         children: []
       }
