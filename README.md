@@ -2,6 +2,19 @@
 
 ## Simple form generator
 
+### Installation
+Add this line to your application's Gemfile:
+
+```gem 'hexlet_code'```
+
+And then execute:
+
+```$ bundle install```
+
+Or install it yourself as:
+
+```$ gem install hexlet_code```
+
 ### Usage
 ```ruby
 user = Struct.new(:name, :job).new('John Doe', 'Hexlet')
