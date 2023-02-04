@@ -15,7 +15,6 @@ module HexletCode
 
     def initialize(entity, form_attributes = {})
       @entity = entity
-      @form_attributes = form_attributes
       @output_type = :html
       @form_data = {
         type: :form,
